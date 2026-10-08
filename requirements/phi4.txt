@@ -1,0 +1,19 @@
+# Phi-4-multimodal baseline. Versions recommended by the Phi-4-multimodal-instruct model card
+# (its remote code requires transformers 4.48.x); the original environment was not preserved.
+torch==2.6.0
+torchaudio==2.6.0
+transformers==4.48.2
+peft==0.13.2
+accelerate==1.3.0
+deepspeed
+flash-attn==2.7.4.post1
+backoff
+librosa==0.11.0
+soundfile==0.13.1
+pandas
+scipy
+scikit-learn
+bert-score==0.3.13
+jellyfish==1.2.1
+editdistance==0.8.1
+yaml_config_manager==0.2.1

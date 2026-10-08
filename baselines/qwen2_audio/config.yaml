@@ -1,0 +1,95 @@
+# Model configuration
+model:
+  name_or_path: "Qwen/Qwen2-Audio-7B-Instruct"
+  use_flash_attention: true
+  unfreeze_speech_encoder: false # Not applicable for Qwen2-Audio (using LoRA instead)
+
+# Data configuration
+data:
+  # Root path where audio files are located
+  data_root_path: "data/sap/SAPC"  # folder containing train/ and dev/
+  
+  # TSV metadata files created by the metadata creation script
+  train_tsv_path: "data/sap/metadata/sapc_metadata_train.tsv"
+  dev_tsv_path: "data/sap/metadata/sapc_metadata_val.tsv"
+  test_tsv_path: "data/sap/metadata/dev_asr_metadata.tsv"
+  
+  # Dataset size limits (null for no limit)
+  train_size: null  # Use all training data
+  eval_size: null   # Use all evaluation data
+  test_size: null   # Use all test data
+  
+  # Instruction for the model
+  instruction: "Transcribe the audio.\n"
+  use_etiology_in_instruction: false # Include etiology in the prompt if available
+  etiology_token: "{etiology}" # Token to replace with etiology in the instruction
+
+  normalizer:
+    normalize_transcripts: true # false for disabling normalization
+    remove_prompts: true # Remove prompts [...]
+    disfluency_action: "keep" # Options: "remove", "keep", "tag" (tag with see below)
+    start_disfluency_tag: "<|disfluency|>" # Start tag to use for disfluencies if 'tag'
+    end_disfluency_tag: "<|end_disfluency|>" # End tag to use for disfluencies if 'tag'
+    
+    # {g:...} are words for which the annotator guessed the transcription
+    g_action: "keep" # Options: "keep", "remove", "tag" (with disfluency_tag ---> not suggested tag)
+    # {ss:...} are words that are like "inner thoughts" - not part of the main transcription
+    ss_action: "keep" # Options: "keep", "remove", "tag" (with disfluency_tag)
+
+    # {w:...} are unclear words with no transcription
+    w_action: "remove" # Options: "keep", "remove", "tag"
+    w_tag: "<|unclear|>" # Start tag to use for {w:...} if 'tag'
+
+    # {cs:...} are interviewer's speech - audible, transcribed, but not part of the main transcription
+    cs_action: "keep" # Options: "keep", "remove", "tag" (with cs_tag)
+    start_cs_tag: "<|external_speech|>" # Start tag to use for {cs:...} if 'tag'
+    end_cs_tag: "<|end_external_speech|>" # End tag to use for {cs:...} if 'tag'
+
+    process_spelled: true # Process spelled words (e.g., "~A~ B~ C~" to "A B C")
+    capitalization: "lower" # Options: "keep", "lower", "upper"
+
+# Training configuration
+training:
+  # Batch size settings
+  batch_size: 64                    # Global batch size (reduced for Qwen2-Audio)
+  batch_size_per_gpu: 8             # Batch size per GPU (Qwen2-Audio is larger)
+  
+  # Training epochs and learning
+  num_train_epochs: 3
+  learning_rate: 0.00001
+  weight_decay: 0.01
+  warmup_steps: 500
+  
+  # Logging and saving
+  logging_steps: 10
+  output_dir: "checkpoints/qwen2-audio-7b-instruct"  # Directory to save checkpoints
+  
+  # Monitoring and reporting
+  report_to: null  # Options: tensorboard, wandb, comet_ml, none
+  use_tqdm: true   # Enable progress bars
+
+# Evaluation configuration
+evaluation:
+  eval_before_training: true # Evaluate model before fine-tuning
+  eval_batch_size: 8        # Batch size for evaluation
+  max_new_tokens: 256        # Maximum tokens to generate during evaluation
+
+testing:
+  trained_model_path: "checkpoints/qwen2-audio-7b-instruct/best_model" # Path to the fine-tuned model for inference
+  output_path: null
+  batch_size: 16            # Batch size for inference
+  max_samples: null  # Maximum number of samples to process (null for all)
+  disable_tqdm: false  # Disable progress bar during inference
+  max_new_tokens: 256   # Maximum number of tokens to generate during inference
+
+# Hardware and performance settings
+hardware:
+  num_workers: 8                # Reduced for Qwen2-Audio (memory intensive)
+  pin_memory: true             # Pin memory for faster GPU transfer
+  prefetch_factor: 2           # Dataloader prefetch factor
+
+# Logging configuration
+logging:
+  log_level: "INFO"            # DEBUG, INFO, WARNING, ERROR
+  log_predictions: true        # Log sample predictions during evaluation
+  save_predictions: true       # Save all predictions to file

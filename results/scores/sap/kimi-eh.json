@@ -1,0 +1,36 @@
+{
+  "predictions": "kimi-eh.jsonl",
+  "dataset": "sap",
+  "overall": {
+    "num_samples": 35597,
+    "wer": 8.1989,
+    "semscore": 90.6573
+  },
+  "groups": {
+    "ALS": {
+      "num_samples": 7041,
+      "wer": 5.9985,
+      "semscore": 91.6334
+    },
+    "Cerebral Palsy": {
+      "num_samples": 6891,
+      "wer": 14.5895,
+      "semscore": 84.2429
+    },
+    "Down Syndrome": {
+      "num_samples": 2699,
+      "wer": 17.79,
+      "semscore": 80.5723
+    },
+    "Parkinson's Disease": {
+      "num_samples": 18003,
+      "wer": 6.4026,
+      "semscore": 94.1265
+    },
+    "Stroke": {
+      "num_samples": 963,
+      "wer": 11.0737,
+      "semscore": 92.8271
+    }
+  }
+}

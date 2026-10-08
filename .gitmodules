@@ -1,0 +1,3 @@
+[submodule "kimi/third_party/Kimi-Audio"]
+	path = kimi/third_party/Kimi-Audio
+	url = https://github.com/MoonshotAI/Kimi-Audio.git

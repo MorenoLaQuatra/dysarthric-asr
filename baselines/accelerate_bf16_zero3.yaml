@@ -1,0 +1,28 @@
+# DeepSpeed ZeRO-3, bf16, 4 GPUs. Gradient accumulation is derived by each training
+# script from training.batch_size / (num_processes * training.batch_size_per_gpu).
+compute_environment: LOCAL_MACHINE
+debug: false
+deepspeed_config:
+  bf16:
+    enabled: true
+  gradient_clipping: 1.0
+  zero_optimization:
+    stage: 3
+    offload_optimizer: false
+    offload_param: false
+distributed_type: DEEPSPEED
+downcast_bf16: 'no'
+dynamo_config:
+  dynamo_backend: NO
+enable_cpu_affinity: false
+machine_rank: 0
+main_training_function: main
+mixed_precision: "bf16"
+num_machines: 1
+num_processes: 4
+rdzv_backend: static
+same_network: true
+tpu_env: []
+tpu_use_cluster: false
+tpu_use_sudo: false
+use_cpu: false

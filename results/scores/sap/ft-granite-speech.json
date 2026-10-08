@@ -1,0 +1,41 @@
+{
+  "predictions": "ft-granite-speech.jsonl",
+  "dataset": "sap",
+  "overall": {
+    "num_samples": 35600,
+    "wer": 13.5329,
+    "semscore": 85.5475
+  },
+  "groups": {
+    "ALS": {
+      "num_samples": 7042,
+      "wer": 12.4106,
+      "semscore": 84.4613
+    },
+    "Cerebral Palsy": {
+      "num_samples": 6892,
+      "wer": 26.1197,
+      "semscore": 75.0837
+    },
+    "Down Syndrome": {
+      "num_samples": 2699,
+      "wer": 25.2589,
+      "semscore": 73.6645
+    },
+    "Parkinson's Disease": {
+      "num_samples": 18002,
+      "wer": 9.6722,
+      "semscore": 91.6105
+    },
+    "Stroke": {
+      "num_samples": 963,
+      "wer": 13.0074,
+      "semscore": 88.4992
+    },
+    "unknown": {
+      "num_samples": 2,
+      "wer": 0.0,
+      "semscore": 9.7261
+    }
+  }
+}

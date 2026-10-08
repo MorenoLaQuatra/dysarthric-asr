@@ -1,0 +1,31 @@
+{
+  "predictions": "zs-phi4-mm.jsonl",
+  "dataset": "torgo",
+  "overall": {
+    "num_samples": 16552,
+    "wer": 21.2785,
+    "semscore": 76.9949
+  },
+  "groups": {
+    "healthy_sentence": {
+      "num_samples": 2841,
+      "wer": 2.8135,
+      "semscore": 97.8458
+    },
+    "healthy_single_word": {
+      "num_samples": 8137,
+      "wer": 29.1226,
+      "semscore": 81.4686
+    },
+    "non-healthy_sentence": {
+      "num_samples": 1321,
+      "wer": 33.7378,
+      "semscore": 69.6067
+    },
+    "non-healthy_single_word": {
+      "num_samples": 4253,
+      "wer": 63.5787,
+      "semscore": 56.802
+    }
+  }
+}

@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.cache/
+# local data and checkpoints (SAP is distributed under a data-use agreement)
+data/sap/
+data/torgo/
+checkpoints/
+hf_staging/
+*.log
+# SAP split files are shared on request only (see data/splits/README.md)
+data/splits/*.txt
+data/splits/*.txt.gz
+results/predictions/

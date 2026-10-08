@@ -1,0 +1,27 @@
+# Kimi-Audio training / inference, data preparation, evaluation,
+# and the Qwen2-Audio, Granite and Whisper baselines.
+# Versions of the environment used for the paper (Python 3.12, CUDA 12.4).
+torch==2.6.0
+torchaudio==2.6.0
+transformers==4.53.2
+peft==0.16.0
+accelerate==1.6.0
+deepspeed==0.17.2
+flash-attn==2.7.4.post1   # install with: pip install flash-attn --no-build-isolation
+huggingface-hub==0.30.2
+datasets==4.0.0
+librosa==0.11.0
+soundfile==0.13.1
+tiktoken==0.9.0
+sentencepiece==0.2.0
+loguru==0.7.3
+pandas==2.2.3
+numpy==2.2.5
+scipy==1.15.2
+scikit-learn==1.6.1
+bert-score==0.3.13
+jellyfish==1.2.1
+editdistance==0.8.1
+evaluate
+yaml_config_manager==0.2.1
+# Kimi-Audio's own requirements (kimi/third_party/Kimi-Audio/requirements.txt) are also needed

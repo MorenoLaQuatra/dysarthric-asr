@@ -1,0 +1,7 @@
+# Parakeet baseline: install NeMo from source at the commit used in the paper (v2.5.0rc0)
+#   git clone https://github.com/NVIDIA/NeMo && cd NeMo && git checkout 29fc2ec3a && pip install -e ".[asr]"
+# then the evaluation dependencies:
+bert-score==0.3.13
+jellyfish==1.2.1
+editdistance==0.8.1
+scikit-learn

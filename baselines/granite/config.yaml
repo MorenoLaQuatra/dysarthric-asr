@@ -1,0 +1,96 @@
+# Model configuration
+model:
+  # Using Granite Speech 8B model for efficiency (as shown in the example)
+  name_or_path: "ibm-granite/granite-speech-3.3-8b"
+  use_flash_attention: true
+  unfreeze_speech_encoder: true # Unfreeze the speech encoder for fine-tuning
+
+# Data configuration
+data:
+  # Root path where audio files are located
+  data_root_path: "data/sap/SAPC"  # folder containing train/ and dev/
+  
+  # TSV metadata files created by the metadata creation script
+  train_tsv_path: "data/sap/metadata/sapc_metadata_train.tsv"
+  dev_tsv_path: "data/sap/metadata/sapc_metadata_val.tsv"
+  test_tsv_path: "data/sap/metadata/dev_asr_metadata.tsv"
+  
+  # Dataset size limits (null for no limit)
+  train_size: null  # Use all training data
+  eval_size: null   # Use all evaluation data
+  test_size: null   # Use all test data
+  
+  # Instruction for the model (following Granite Speech format)
+  instruction: "Please transcribe the following audio to text"
+  use_etiology_in_instruction: false # Include etiology in the prompt if available
+  etiology_token: "{etiology}" # Token to replace with etiology in the instruction
+
+  normalizer:
+    normalize_transcripts: true # false for disabling normalization
+    remove_prompts: true # Remove prompts [...]
+    disfluency_action: "keep" # Options: "remove", "keep", "tag" (tag with see below)
+    start_disfluency_tag: "<|disfluency|>" # Start tag to use for disfluencies if 'tag'
+    end_disfluency_tag: "<|end_disfluency|>" # End tag to use for disfluencies if 'tag'
+    
+    # {g:...} are words for which the annotator guessed the transcription
+    g_action: "keep" # Options: "keep", "remove", "tag" (with disfluency_tag ---> not suggested tag)
+    # {ss:...} are words that are like "inner thoughts" - not part of the main transcription
+    ss_action: "keep" # Options: "keep", "remove", "tag" (with disfluency_tag)
+
+    # {w:...} are unclear words with no transcription
+    w_action: "remove" # Options: "keep", "remove", "tag"
+    w_tag: "<|unclear|>" # Start tag to use for {w:...} if 'tag'
+
+    # {cs:...} are interviewer's speech - audible, transcribed, but not part of the main transcription
+    cs_action: "keep" # Options: "keep", "remove", "tag" (with cs_tag)
+    start_cs_tag: "<|external_speech|>" # Start tag to use for {cs:...} if 'tag'
+    end_cs_tag: "<|end_external_speech|>" # End tag to use for {cs:...} if 'tag'
+
+    process_spelled: true # Process spelled words (e.g., "~A~ B~ C~" to "A B C")
+    capitalization: "lower" # Options: "keep", "lower", "upper"
+
+# Training configuration
+training:
+  # Batch size settings
+  batch_size: 64                    # Global batch size
+  batch_size_per_gpu: 2             # Batch size per GPU (adjust for GPU memory)
+  
+  # Training epochs and learning
+  num_train_epochs: 3
+  learning_rate: 0.00005 # max LR = 5e-5 (same as Phi-4)
+  weight_decay: 0.01
+  warmup_steps: 500
+  
+  # Logging and saving
+  logging_steps: 10
+  output_dir: "checkpoints/granite-speech-3.3-8b" # Directory to save checkpoints
+  
+  # Monitoring and reporting
+  report_to: comet_ml  # Options: tensorboard, wandb, comet_ml, none
+  use_tqdm: true   # Enable progress bars
+
+# Evaluation configuration
+evaluation:
+  eval_before_training: false # Evaluate model before fine-tuning
+  eval_batch_size: 16        # Batch size for evaluation
+  max_new_tokens: 256        # Maximum tokens to generate during evaluation
+
+testing:
+  trained_model_path: "checkpoints/granite-speech-3.3-8b/best_model" # Path to the fine-tuned model for inference
+  output_path: null
+  batch_size: 16            # Batch size for inference
+  max_samples: null  # Maximum number of samples to process (null for all)
+  disable_tqdm: false  # Disable progress bar during inference
+  max_new_tokens: 256   # Maximum number of tokens to generate during inference
+
+# Hardware and performance settings
+hardware:
+  num_workers: 16                # Number of dataloader workers
+  pin_memory: true             # Pin memory for faster GPU transfer
+  prefetch_factor: 2           # Dataloader prefetch factor
+
+# Logging configuration
+logging:
+  log_level: "INFO"            # DEBUG, INFO, WARNING, ERROR
+  log_predictions: true        # Log sample predictions during evaluation
+  save_predictions: true       # Save all predictions to file

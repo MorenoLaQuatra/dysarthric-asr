@@ -1,0 +1,31 @@
+{
+  "predictions": "kimi-eh.jsonl",
+  "dataset": "torgo",
+  "overall": {
+    "num_samples": 16552,
+    "wer": 16.1588,
+    "semscore": 82.6806
+  },
+  "groups": {
+    "healthy_sentence": {
+      "num_samples": 2841,
+      "wer": 2.3935,
+      "semscore": 98.447
+    },
+    "healthy_single_word": {
+      "num_samples": 8137,
+      "wer": 20.1769,
+      "semscore": 87.1072
+    },
+    "non-healthy_sentence": {
+      "num_samples": 1321,
+      "wer": 25.3573,
+      "semscore": 74.8538
+    },
+    "non-healthy_single_word": {
+      "num_samples": 4253,
+      "wer": 51.399,
+      "semscore": 66.1104
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "predictions": "zs-qwen2-audio.jsonl",
+  "dataset": "torgo",
+  "overall": {
+    "num_samples": 16552,
+    "wer": 41.6663,
+    "semscore": 43.078
+  },
+  "groups": {
+    "healthy_sentence": {
+      "num_samples": 2841,
+      "wer": 14.9529,
+      "semscore": 88.3989
+    },
+    "healthy_single_word": {
+      "num_samples": 8137,
+      "wer": 81.0641,
+      "semscore": 34.2787
+    },
+    "non-healthy_sentence": {
+      "num_samples": 1321,
+      "wer": 41.5733,
+      "semscore": 61.6128
+    },
+    "non-healthy_single_word": {
+      "num_samples": 4253,
+      "wer": 90.6184,
+      "semscore": 23.8818
+    }
+  }
+}

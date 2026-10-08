@@ -1,0 +1,31 @@
+{
+  "predictions": "ft-kimi-audio.jsonl",
+  "dataset": "torgo",
+  "overall": {
+    "num_samples": 16552,
+    "wer": 16.1756,
+    "semscore": 82.6865
+  },
+  "groups": {
+    "healthy_sentence": {
+      "num_samples": 2841,
+      "wer": 2.4238,
+      "semscore": 98.3801
+    },
+    "healthy_single_word": {
+      "num_samples": 8137,
+      "wer": 20.2384,
+      "semscore": 87.1084
+    },
+    "non-healthy_sentence": {
+      "num_samples": 1321,
+      "wer": 25.4704,
+      "semscore": 74.207
+    },
+    "non-healthy_single_word": {
+      "num_samples": 4253,
+      "wer": 51.0463,
+      "semscore": 66.377
+    }
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "predictions": "kimi-ep.jsonl",
+  "dataset": "sap",
+  "overall": {
+    "num_samples": 35597,
+    "wer": 7.7682,
+    "semscore": 91.0504
+  },
+  "groups": {
+    "ALS": {
+      "num_samples": 7041,
+      "wer": 5.7457,
+      "semscore": 92.115
+    },
+    "Cerebral Palsy": {
+      "num_samples": 6891,
+      "wer": 13.7602,
+      "semscore": 85.2073
+    },
+    "Down Syndrome": {
+      "num_samples": 2699,
+      "wer": 17.8984,
+      "semscore": 80.6446
+    },
+    "Parkinson's Disease": {
+      "num_samples": 18003,
+      "wer": 6.0317,
+      "semscore": 94.3207
+    },
+    "Stroke": {
+      "num_samples": 963,
+      "wer": 8.8037,
+      "semscore": 93.1048
+    }
+  },
+  "etiology_classification": {
+    "accuracy": 71.69986234795067,
+    "weighted_f1": 72.07640521819809,
+    "labels": [
+      "ALS",
+      "Cerebral Palsy",
+      "Down Syndrome",
+      "Parkinson's",
+      "Parkinson's Disease",
+      "Stroke",
+      "Unknown"
+    ],
+    "confusion_matrix": [
+      [
+        4144,
+        1025,
+        69,
+        0,
+        1580,
+        223,
+        0
+      ],
+      [
+        674,
+        4093,
+        342,
+        0,
+        1359,
+        422,
+        1
+      ],
+      [
+        32,
+        472,
+        1799,
+        0,
+        147,
+        249,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1788,
+        437,
+        34,
+        1,
+        15083,
+        659,
+        1
+      ],
+      [
+        68,
+        13,
+        55,
+        0,
+        423,
+        404,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "report": {
+      "ALS": {
+        "precision": 0.6179540709812108,
+        "recall": 0.5885527623917057,
+        "f1-score": 0.6028951771295555,
+        "support": 7041.0
+      },
+      "Cerebral Palsy": {
+        "precision": 0.6776490066225166,
+        "recall": 0.593963140327964,
+        "f1-score": 0.6330523548062795,
+        "support": 6891.0
+      },
+      "Down Syndrome": {
+        "precision": 0.7825141365811222,
+        "recall": 0.6665431641348648,
+        "f1-score": 0.7198879551820728,
+        "support": 2699.0
+      },
+      "Parkinson's": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "Parkinson's Disease": {
+        "precision": 0.811262908777969,
+        "recall": 0.8378048103093929,
+        "f1-score": 0.8243202623309195,
+        "support": 18003.0
+      },
+      "Stroke": {
+        "precision": 0.2064384261624936,
+        "recall": 0.4195223260643821,
+        "f1-score": 0.27671232876712326,
+        "support": 963.0
+      },
+      "Unknown": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "accuracy": 0.7169986234795067,
+      "macro avg": {
+        "precision": 0.44225979273218746,
+        "recall": 0.4437694576040442,
+        "f1-score": 0.43669543974513575,
+        "support": 35597.0
+      },
+      "weighted avg": {
+        "precision": 0.7286194320917823,
+        "recall": 0.7169986234795067,
+        "f1-score": 0.7207640521819809,
+        "support": 35597.0
+      }
+    }
+  },
+  "misclassification_analysis": {
+    "correct": {
+      "num_samples": 25523,
+      "wer": 7.7848,
+      "semscore": 90.7075
+    },
+    "incorrect": {
+      "num_samples": 10074,
+      "wer": 7.7174,
+      "semscore": 91.9191
+    },
+    "per_group": {
+      "ALS": {
+        "correct": {
+          "num_samples": 4144,
+          "wer": 7.0149,
+          "semscore": 90.0184
+        },
+        "incorrect": {
+          "num_samples": 2897,
+          "wer": 3.8109,
+          "semscore": 95.1139
+        }
+      },
+      "Cerebral Palsy": {
+        "correct": {
+          "num_samples": 4093,
+          "wer": 18.1042,
+          "semscore": 79.0898
+        },
+        "incorrect": {
+          "num_samples": 2798,
+          "wer": 7.1871,
+          "semscore": 94.1562
+        }
+      },
+      "Down Syndrome": {
+        "correct": {
+          "num_samples": 1799,
+          "wer": 13.9662,
+          "semscore": 85.276
+        },
+        "incorrect": {
+          "num_samples": 900,
+          "wer": 28.6484,
+          "semscore": 71.3871
+        }
+      },
+      "Parkinson's Disease": {
+        "correct": {
+          "num_samples": 15083,
+          "wer": 5.5869,
+          "semscore": 94.7047
+        },
+        "incorrect": {
+          "num_samples": 2920,
+          "wer": 8.5574,
+          "semscore": 92.3374
+        }
+      },
+      "Stroke": {
+        "correct": {
+          "num_samples": 404,
+          "wer": 10.5546,
+          "semscore": 90.4331
+        },
+        "incorrect": {
+          "num_samples": 559,
+          "wer": 7.6232,
+          "semscore": 95.0357
+        }
+      }
+    }
+  }
+}

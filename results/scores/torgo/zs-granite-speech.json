@@ -1,0 +1,31 @@
+{
+  "predictions": "zs-granite-speech.jsonl",
+  "dataset": "torgo",
+  "overall": {
+    "num_samples": 16552,
+    "wer": 25.9731,
+    "semscore": 70.5713
+  },
+  "groups": {
+    "healthy_sentence": {
+      "num_samples": 2841,
+      "wer": 2.6313,
+      "semscore": 98.1923
+    },
+    "healthy_single_word": {
+      "num_samples": 8137,
+      "wer": 46.1293,
+      "semscore": 71.7352
+    },
+    "non-healthy_sentence": {
+      "num_samples": 1321,
+      "wer": 36.4319,
+      "semscore": 66.8294
+    },
+    "non-healthy_single_word": {
+      "num_samples": 4253,
+      "wer": 71.9492,
+      "semscore": 51.0558
+    }
+  }
+}

@@ -1,0 +1,115 @@
+# Whisper Large V3 configuration for dysarthric speech ASR
+model:
+  name_or_path: "openai/whisper-large-v3"
+  language: "english"  # Language for forced decoding
+  task: "transcribe"   # Task: transcribe or translate
+  
+  # LoRA Configuration (set use_lora: true to enable)
+  use_lora: false                   # Enable LoRA fine-tuning
+  lora_r: 16                        # LoRA rank (lower = fewer parameters)
+  lora_alpha: 32                    # LoRA alpha (scaling factor)
+  lora_dropout: 0.1                 # LoRA dropout rate
+  lora_bias: "none"                 # LoRA bias handling: "none", "all", "lora_only"
+  lora_target_modules: "auto"       # "auto", "detailed", or list of module names
+                                    # "auto" targets all attention projections
+                                    # "detailed" targets specific layers
+  
+# Data configuration
+data:
+  # Root path where audio files are located
+  data_root_path: "data/sap/SAPC"  # folder containing train/ and dev/
+  
+  # TSV metadata files created by the metadata creation script
+  train_tsv_path: "data/sap/metadata/sapc_metadata_train.tsv"
+  dev_tsv_path: "data/sap/metadata/sapc_metadata_val.tsv"
+  test_tsv_path: "data/sap/metadata/dev_asr_metadata.tsv"
+  
+  # Dataset size limits (null for no limit)
+  train_size: null  # Use all training data
+  eval_size: null   # Use all evaluation data
+  test_size: null   # Use all test data
+  
+  # Audio processing
+  sampling_rate: 16000  # Whisper uses 16kHz
+
+  normalizer:
+    normalize_transcripts: true # false for disabling normalization
+    remove_prompts: true # Remove prompts [...]
+    disfluency_action: "remove" # Options: "remove", "keep", "tag"
+    start_disfluency_tag: "<|disfluency|>" # Start tag to use for disfluencies if 'tag'
+    end_disfluency_tag: "<|end_disfluency|>" # End tag to use for disfluencies if 'tag'
+    
+    # {g:...} are words for which the annotator guessed the transcription
+    g_action: "keep" # Options: "keep", "remove", "tag"
+    # {ss:...} are words that are like "inner thoughts" - not part of the main transcription
+    ss_action: "keep" # Options: "keep", "remove", "tag"
+
+    # {w:...} are unclear words with no transcription
+    w_action: "remove" # Options: "keep", "remove", "tag"
+    w_tag: "<|unclear|>" # Tag to use for {w:...} if 'tag'
+
+    # {cs:...} are interviewer's speech - audible, transcribed, but not part of the main transcription
+    cs_action: "keep" # Options: "keep", "remove", "tag"
+    start_cs_tag: "<|external_speech|>" # Start tag to use for {cs:...} if 'tag'
+    end_cs_tag: "<|end_external_speech|>" # End tag to use for {cs:...} if 'tag'
+
+    process_spelled: true # Process spelled words (e.g., "~A~ B~ C~" to "A B C")
+    capitalization: "lower" # Options: "keep", "lower", "upper"
+
+# Training configuration
+training:
+  # Batch size settings
+  batch_size: 64                    # Global batch size
+  batch_size_per_gpu: 16             # Batch size per GPU (adjust for GPU memory)
+  
+  # Training epochs and learning
+  num_train_epochs: 3
+  max_steps: -1                     # If > 0, overrides num_train_epochs
+  learning_rate: 0.00001           # Lower learning rate for Whisper fine-tuning
+  weight_decay: 0.01
+  warmup_steps: 500
+  
+  # Precision and optimization
+  fp16: true                       # Use FP16 for faster training
+  gradient_checkpointing: false     # Save memory
+  
+  # Logging and saving
+  logging_steps: 10
+  save_steps: 500                  # Save checkpoint every N steps
+  eval_steps: 500                  # Evaluate every N steps
+  output_dir: "checkpoints/whisper-large-v3"
+  
+  # Monitoring and reporting
+  report_to: null  # Options: tensorboard, wandb, comet_ml, none
+  use_tqdm: true   # Enable progress bars
+  save_strategy: epoch
+  eval_strategy: epoch 
+
+# Evaluation configuration
+evaluation:
+  eval_before_training: true # Evaluate model before fine-tuning
+  eval_batch_size: 64        # Batch size for evaluation
+  max_new_tokens: 256        # Maximum tokens to generate during evaluation
+  compute_semscore: false    # Set to true if you want SemScore (takes longer)
+  path_ckpt_to_eval: null  # Path to checkpoint to evaluate, if not using latest
+
+# Hardware and performance settings
+hardware:
+  num_workers: 8                # Number of dataloader workers (reduced for Whisper)
+  pin_memory: true             # Pin memory for faster GPU transfer
+  prefetch_factor: 2           # Dataloader prefetch factor
+
+# Logging configuration
+logging:
+  log_level: "INFO"            # DEBUG, INFO, WARNING, ERROR
+  log_predictions: true        # Log sample predictions during evaluation
+  save_predictions: true       # Save all predictions to file
+
+
+testing:
+  trained_model_path: "checkpoints/whisper-large-v3/best_model" # Path to the fine-tuned model for inference
+  output_path: null
+  batch_size: 16 # Batch size for inference
+  max_samples: null  # Maximum number of samples to process (null for all)
+  disable_tqdm: false  # Disable progress bar during inference
+  max_new_tokens: 256   # Maximum number of tokens to generate during inference

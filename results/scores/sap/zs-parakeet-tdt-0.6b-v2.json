@@ -1,0 +1,36 @@
+{
+  "predictions": "zs-parakeet-tdt-0.6b-v2.jsonl",
+  "dataset": "sap",
+  "overall": {
+    "num_samples": 35598,
+    "wer": 17.7653,
+    "semscore": 74.2965
+  },
+  "groups": {
+    "ALS": {
+      "num_samples": 7042,
+      "wer": 17.3646,
+      "semscore": 71.8067
+    },
+    "Cerebral Palsy": {
+      "num_samples": 6892,
+      "wer": 32.7736,
+      "semscore": 56.942
+    },
+    "Down Syndrome": {
+      "num_samples": 2699,
+      "wer": 40.6375,
+      "semscore": 53.3629
+    },
+    "Parkinson's Disease": {
+      "num_samples": 18002,
+      "wer": 12.1477,
+      "semscore": 84.5712
+    },
+    "Stroke": {
+      "num_samples": 963,
+      "wer": 16.2084,
+      "semscore": 83.3054
+    }
+  }
+}

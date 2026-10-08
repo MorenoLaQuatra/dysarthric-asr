@@ -1,0 +1,36 @@
+{
+  "predictions": "ft-kimi-audio.jsonl",
+  "dataset": "sap",
+  "overall": {
+    "num_samples": 35595,
+    "wer": 8.3006,
+    "semscore": 90.4809
+  },
+  "groups": {
+    "ALS": {
+      "num_samples": 7041,
+      "wer": 5.9817,
+      "semscore": 91.6293
+    },
+    "Cerebral Palsy": {
+      "num_samples": 6890,
+      "wer": 14.9131,
+      "semscore": 83.8945
+    },
+    "Down Syndrome": {
+      "num_samples": 2699,
+      "wer": 18.288,
+      "semscore": 79.857
+    },
+    "Parkinson's Disease": {
+      "num_samples": 18002,
+      "wer": 6.4615,
+      "semscore": 94.0677
+    },
+    "Stroke": {
+      "num_samples": 963,
+      "wer": 10.8698,
+      "semscore": 91.9316
+    }
+  }
+}

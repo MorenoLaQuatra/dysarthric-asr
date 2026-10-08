@@ -1,0 +1,31 @@
+{
+  "predictions": "ft-parakeet-tdt-0.6b-v2.jsonl",
+  "dataset": "torgo",
+  "overall": {
+    "num_samples": 16552,
+    "wer": 21.7155,
+    "semscore": 76.8977
+  },
+  "groups": {
+    "healthy_sentence": {
+      "num_samples": 2841,
+      "wer": 4.0229,
+      "semscore": 96.7868
+    },
+    "healthy_single_word": {
+      "num_samples": 8137,
+      "wer": 33.5586,
+      "semscore": 79.4773
+    },
+    "non-healthy_sentence": {
+      "num_samples": 1321,
+      "wer": 31.3419,
+      "semscore": 70.3058
+    },
+    "non-healthy_single_word": {
+      "num_samples": 4253,
+      "wer": 59.2523,
+      "semscore": 60.7241
+    }
+  }
+}

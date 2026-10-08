@@ -1,0 +1,166 @@
+{
+  "predictions": "kimi-ec.jsonl",
+  "dataset": "torgo",
+  "overall": {
+    "num_samples": 16552,
+    "wer": 16.7295,
+    "semscore": 82.5952
+  },
+  "groups": {
+    "healthy_sentence": {
+      "num_samples": 2841,
+      "wer": 2.4846,
+      "semscore": 98.2308
+    },
+    "healthy_single_word": {
+      "num_samples": 8137,
+      "wer": 18.5426,
+      "semscore": 88.0182
+    },
+    "non-healthy_sentence": {
+      "num_samples": 1321,
+      "wer": 28.5141,
+      "semscore": 71.8066
+    },
+    "non-healthy_single_word": {
+      "num_samples": 4253,
+      "wer": 52.5041,
+      "semscore": 65.1263
+    }
+  },
+  "etiology_classification": {
+    "accuracy": 0.0,
+    "weighted_f1": 0.0,
+    "labels": [
+      "ALS",
+      "Cerebral Palsy",
+      "Down Syndrome",
+      "Parkinson's Disease",
+      "Stroke",
+      "dysarthria",
+      "healthy"
+    ],
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        335,
+        2589,
+        305,
+        1557,
+        788,
+        0,
+        0
+      ],
+      [
+        935,
+        1511,
+        241,
+        7249,
+        1042,
+        0,
+        0
+      ]
+    ],
+    "report": {
+      "ALS": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "Cerebral Palsy": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "Down Syndrome": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "Parkinson's Disease": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "Stroke": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "dysarthria": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 5574.0
+      },
+      "healthy": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 10978.0
+      },
+      "accuracy": 0.0,
+      "macro avg": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 16552.0
+      },
+      "weighted avg": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 16552.0
+      }
+    }
+  }
+}

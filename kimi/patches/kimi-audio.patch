@@ -1,0 +1,58 @@
+diff --git a/finetune_codes/datasets.py b/finetune_codes/datasets.py
+index 9324203..0b04c23 100644
+--- a/finetune_codes/datasets.py
++++ b/finetune_codes/datasets.py
+@@ -98,7 +98,13 @@ class LazySupervisedDataset(Dataset):
+                 kimia_content_msg.audio_append(self.extra_tokens.kimia_text_blank, audio_token_loss_mask=False)
+ 
+         elif message["message_type"] == "audio":
+-            speech_tokens = message["audio_tokens"]
++            try:
++                speech_tokens = message["audio_tokens"]
++            except KeyError:
++                print(f"[WARNING] No audio tokens found in message: {message}")
++                # Fallback to another random sample from the dataset
++                rand_idx = torch.randint(0, len(self.raw_data), (1,)).item()
++                return self.__getitem__(rand_idx)
+ 
+             kimia_content_msg.audio_append(self.extra_tokens.media_begin)
+             kimia_content_msg.audio_extend(speech_tokens, is_continuous=True, audio_token_loss_mask=has_loss)
+@@ -206,7 +212,7 @@ class LazySupervisedDataset(Dataset):
+ 
+         return ret_msg
+ 
+-    @lru_cache(maxsize=None)
++    # @lru_cache(maxsize=None)
+     def __getitem__(self, i) -> Dict[str, torch.Tensor]:
+ 
+         task_type = self.raw_data[i]["task_type"]
+diff --git a/kimia_infer/models/tokenizer/whisper_Lv3/whisper.py b/kimia_infer/models/tokenizer/whisper_Lv3/whisper.py
+index 3c56a3f..2df87b9 100644
+--- a/kimia_infer/models/tokenizer/whisper_Lv3/whisper.py
++++ b/kimia_infer/models/tokenizer/whisper_Lv3/whisper.py
+@@ -188,6 +188,9 @@ class WhisperEncoder(nn.Module):
+ 
+         final_audio_embedding = []
+ 
++        # Get the dtype from the speech_encoder model for robust dtype handling
++        model_dtype = next(self.speech_encoder.parameters()).dtype
++
+         for audio_segment in audios:
+             # import pdb; pdb.set_trace()
+             assert audio_segment.shape[0] <= 480000
+@@ -205,13 +208,13 @@ class WhisperEncoder(nn.Module):
+                     torch.cuda.current_device()
+                 )
+                 audio_embedding = self.speech_encoder(
+-                    mel.unsqueeze(0).to(torch.cuda.current_device()).to(torch.bfloat16),
++                    mel.unsqueeze(0).to(torch.cuda.current_device()).to(model_dtype),
+                     return_dict=True,
+                     input_seq_lens=input_seq_lens,
+                 ).last_hidden_state
+             else:
+                 audio_embedding = self.speech_encoder(
+-                    mel.unsqueeze(0).to(torch.cuda.current_device()).to(torch.bfloat16),
++                    mel.unsqueeze(0).to(torch.cuda.current_device()).to(model_dtype),
+                     return_dict=True,
+                 ).last_hidden_state
+                 # audio_embedding: [1, 3000, 1280]

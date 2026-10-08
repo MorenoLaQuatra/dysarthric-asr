@@ -1,0 +1,36 @@
+{
+  "predictions": "zs-whisper-large-v3.jsonl",
+  "dataset": "sap",
+  "overall": {
+    "num_samples": 35598,
+    "wer": 24.4222,
+    "semscore": 76.9133
+  },
+  "groups": {
+    "ALS": {
+      "num_samples": 7042,
+      "wer": 23.6008,
+      "semscore": 76.3659
+    },
+    "Cerebral Palsy": {
+      "num_samples": 6892,
+      "wer": 37.9361,
+      "semscore": 61.1023
+    },
+    "Down Syndrome": {
+      "num_samples": 2699,
+      "wer": 37.2949,
+      "semscore": 57.2703
+    },
+    "Parkinson's Disease": {
+      "num_samples": 18002,
+      "wer": 20.3747,
+      "semscore": 85.6791
+    },
+    "Stroke": {
+      "num_samples": 963,
+      "wer": 14.7825,
+      "semscore": 85.2617
+    }
+  }
+}

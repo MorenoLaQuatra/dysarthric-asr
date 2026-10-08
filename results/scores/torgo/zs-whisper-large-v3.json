@@ -1,0 +1,31 @@
+{
+  "predictions": "zs-whisper-large-v3.jsonl",
+  "dataset": "torgo",
+  "overall": {
+    "num_samples": 16552,
+    "wer": 18.5348,
+    "semscore": 79.3081
+  },
+  "groups": {
+    "healthy_sentence": {
+      "num_samples": 2841,
+      "wer": 2.52,
+      "semscore": 97.7795
+    },
+    "healthy_single_word": {
+      "num_samples": 8137,
+      "wer": 24.0845,
+      "semscore": 84.224
+    },
+    "non-healthy_sentence": {
+      "num_samples": 1321,
+      "wer": 28.2879,
+      "semscore": 71.4978
+    },
+    "non-healthy_single_word": {
+      "num_samples": 4253,
+      "wer": 60.0282,
+      "semscore": 59.9897
+    }
+  }
+}
